@@ -32,7 +32,7 @@ class NonIIDGenerator(BaseGenerator):
             np.random.seed(random_state)
 
         # Generate clustered data
-        self.X, self.y = self.generate_clusters()
+        self.X, self.y = self.generate_data()
 
     def generate_data(self):
         """

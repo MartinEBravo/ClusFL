@@ -14,12 +14,16 @@ class KMedianClient:
             n_clusters=self.n_clusters, max_iter=self.max_iter, method=method
         )
 
+    def get_id(self):
+        return self.client_id
+    
     def fit(self):
         self.centers, self.weights = self.model.fit(self.data)
         return self.centers, self.weights
 
     def send_to_server(self, server):
         if self.centers and self.weights:
+            
             server.receive_from_client(self.centers, self.weights)
         else:
             print("No clusters to send to server")

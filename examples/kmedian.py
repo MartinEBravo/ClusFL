@@ -1,10 +1,12 @@
 import numpy as np
 from clusfl.models import KMedian
+from clusfl.data.non_iid_generator import NonIIDGenerator
 from sklearn.cluster import KMeans
 
 
 def test_kmedian_vs_kmeans():
-    X = np.random.rand(100, 2)
+    data_generator = NonIIDGenerator(n_samples=1000, n_clusters=3, cluster_std=1.0)
+    X, y = data_generator.generate_data()
 
     # KMedian clustering
     kmedian = KMedian(n_clusters=3)

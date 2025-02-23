@@ -14,6 +14,7 @@ class KMedian(BaseModel):
     def _get_model(self, method):
         methods = {
             "approx_kmedian": KMedianApprox,
+            "
         }
         if method in methods:
             return methods[method](self.n_clusters)

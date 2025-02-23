@@ -51,8 +51,10 @@ def federated_k_median_non_iid(
 
     # Clientes ejecutan k-Median Approx y envían clusters al servidor
     for client in clients:
+        id = client.get_id()
         clusters, weights = client.fit(max_iter=max_iter)
-        server.receive_from_client(clusters, weights)
+        server.receive_from_client(id, clusters, weights)
+        print(f"Client {id} sent clusters to server")
 
     # # El servidor computa los clusters finales
     # global_clusters = server.compute_global_clusters()
