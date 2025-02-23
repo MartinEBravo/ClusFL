@@ -42,6 +42,7 @@ def create_gitkeep_files(dir_path):
     with open(os.path.join(dir_path, ".gitkeep"), "w") as f:
         f.write("")
 
+
 # Function to create directories
 def create_directories():
     for parent, subdirs in repo_structure.items():
@@ -52,6 +53,7 @@ def create_directories():
                 create_gitkeep_files(os.path.join(parent, subdir))
         else:
             create_gitkeep_files(parent)
+
 
 # Function to create base files
 def create_base_files():
