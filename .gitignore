@@ -10,3 +10,5 @@ literature/
 notebooks/
 clusfl.egg-info/
 .ruff_cache/
+.benchmarks/
+.pytest_cache/

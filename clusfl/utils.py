@@ -2,8 +2,8 @@ import numpy as np
 from clusfl.cluster import KMeans, KMedian, KMedoids
 
 
-# ------------------ CLUSTERING UTILS ------------------
-class ClusteringUtils:
+# ------------------ UTILS ------------------
+class Utils:
     @staticmethod
     def invoke_clustering_model(model, num_clusters):
         if model == "kmeans":
@@ -30,3 +30,20 @@ class ClusteringUtils:
             matched_centers.append(fixed_centers[np.argmin(distances)])
 
         return np.array(matched_centers)
+
+    @staticmethod
+    def get_all_points(client_data, actual_centers, aggregated_centers):
+        all_points = np.vstack(client_data)
+        all_labels = np.array(
+            [
+                np.argmin(np.linalg.norm(point - actual_centers, axis=1))
+                for point in all_points
+            ]
+        )
+        all_predicted_labels = np.array(
+            [
+                np.argmin(np.linalg.norm(point - aggregated_centers, axis=1))
+                for point in all_points
+            ]
+        )
+        return all_points, all_labels, all_predicted_labels

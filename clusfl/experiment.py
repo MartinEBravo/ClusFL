@@ -1,6 +1,8 @@
 import numpy as np
 import tqdm
-from clusfl.federated import FederatedClustering
+from clusfl.federated import FederatedAlgorithm
+from clusfl.dataset import DataGenerator
+from clusfl.metrics import Metrics
 
 
 class Experiment:
@@ -26,14 +28,20 @@ class Experiment:
             results[m]["cluster_variance"] = []
 
         for _ in tqdm.tqdm(range(iterations)):
+            client_data, _ = DataGenerator.generate_federated_data(
+                num_clients,
+                num_samples_per_client,
+                num_clusters,
+                distribution_setup,
+                num_features,
+                fixed_centers,
+            )
+
             for m in model:
-                fed_results = FederatedClustering.federated_clustering(
-                    distribution_setup,
-                    num_clients=num_clients,
-                    num_samples_per_client=num_samples_per_client,
-                    num_clusters=num_clusters,
+                fed_results = FederatedAlgorithm.federated_clustering(
+                    client_data=client_data,
                     fixed_centers=fixed_centers,
-                    num_features=num_features,
+                    num_clusters=num_clusters,
                     model=m,
                 )
 
@@ -48,19 +56,5 @@ class Experiment:
                 results[m]["avg_distance"].append(avg_distance)
                 results[m]["cluster_variance"].append(cluster_variance)
 
-        results_summary = Experiment.show_results(results)
+        results_summary = Metrics.show_results(results)
         return results_summary
-
-    @staticmethod
-    def show_results(results):
-        """Displays the results of the clustering experiment."""
-        print("\n------------------ RESULTS ------------------")
-        results_str = ""
-        for model, metrics in results.items():
-            results_str += f"\n\nModel: {model}\n"
-            for metric, values in metrics.items():
-                avg_value = np.mean(values)
-                results_str += f"{metric}: {avg_value:.4f} (±{np.std(values):.4f})\n"
-
-        print(results_str)
-        return results_str

@@ -1,5 +1,5 @@
 import numpy as np
-from clusfl.utils import ClusteringUtils
+from clusfl.utils import Utils
 
 
 class Client:
@@ -9,7 +9,7 @@ class Client:
         cluster_centers = []
         for client in client_data:
             try:
-                cfl = ClusteringUtils.invoke_clustering_model(model, num_clusters)
+                cfl = Utils.invoke_clustering_model(model, num_clusters)
             except ValueError:
                 raise ValueError("Unsupported clustering model.")
             cfl.fit(client)
