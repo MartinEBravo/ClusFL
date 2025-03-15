@@ -10,3 +10,4 @@ literature/
 notebooks/
 clusfl.egg-info/
 .ruff_cache/
+Makefile
