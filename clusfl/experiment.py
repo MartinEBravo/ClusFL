@@ -19,6 +19,15 @@ class Experiment:
     ):
         """Compares clustering algorithms with additional stability metrics."""
         print("\n------------------ EXPERIMENT: NON-IID ------------------")
+        print("Distribution setup: ", distribution_setup)
+        print("Number of clients: ", num_clients)
+        print("Number of samples per client: ", num_samples_per_client)
+        print("Number of clusters: ", num_clusters)
+        print("Fixed centers: ", fixed_centers)
+        print("Number of features: ", num_features)
+        print("Model: ", model)
+        print("Iterations: ", iterations)
+
         results = {}
         for m in model:
             results[m] = {}

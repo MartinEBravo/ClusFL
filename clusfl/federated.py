@@ -104,7 +104,9 @@ class FederatedAlgorithm:
             cfl = ClusteringAlgorithm.invoke_clustering_model(model, num_clusters)
 
             # 🔹 Expand data using weights (avoid np.repeat issues)
-            clustering_data = np.concatenate([np.tile(centers[i], (weights[i], 1)) for i in range(len(weights))])
+            clustering_data = np.concatenate(
+                [np.tile(centers[i], (weights[i], 1)) for i in range(len(weights))]
+            )
 
             # Fit the global clustering model
             cfl.fit(clustering_data)
