@@ -1,4 +1,6 @@
 from clusfl.dataset import DataGenerator
+from clusfl.client import Client
+from clusfl.server import Server
 from clusfl.utils import ClusteringUtils
 import numpy as np
 from .metrics import normalized_mutual_info_score, silhouette_score
@@ -24,9 +26,8 @@ class FederatedClustering:
             num_features,
             fixed_centers,
         )
-        aggregated_centers = ClusteringUtils.aggregate_cluster_centers(
-            client_data, num_clusters, model=model
-        )
+        cluster_centers = Client.aggregate_cluster_centers(client_data, num_clusters, model=model)
+        aggregated_centers = Server.aggregate_cluster_centers(cluster_centers, num_clusters, model=model)
         actual_centers = ClusteringUtils.match_centers(
             aggregated_centers, fixed_centers
         )
