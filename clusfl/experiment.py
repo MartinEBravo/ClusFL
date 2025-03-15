@@ -5,7 +5,7 @@ from clusfl.federated import FederatedClustering
 
 class Experiment:
     @staticmethod
-    def compare_two_clustering_algorithms(
+    def compare_clustering_algorithms(
         distribution_setup,
         num_clients=10,
         num_samples_per_client=100,
