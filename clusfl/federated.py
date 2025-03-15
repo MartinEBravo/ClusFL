@@ -10,12 +10,11 @@ class FederatedAlgorithm:
         client_data,
         num_clusters,
         fixed_centers,
-        model="kmeans",
         federated_algorithm="fedavg",
     ):
         """Performs federated clustering."""
-        aggregated_centers = FederatedAlgorithm.simple_federated_clustering(
-            client_data, num_clusters, fixed_centers, model=model
+        aggregated_centers = FederatedAlgorithm.invoke_federated_algorithm(
+            client_data, num_clusters, federated_algorithm
         )
 
         actual_centers = Utils.match_centers(aggregated_centers, fixed_centers)
@@ -35,9 +34,25 @@ class FederatedAlgorithm:
         }
 
     @staticmethod
-    def simple_federated_clustering(
-        client_data, num_clusters, fixed_centers, model="kmeans"
+    def invoke_federated_algorithm(
+        client_data,
+        num_clusters,
+        federated_algorithm="simple_kmeans",
     ):
+        """Invokes the federated algorithm."""
+        if federated_algorithm == "simple_kmeans":
+            return FederatedAlgorithm.simple_federated_clustering(
+                client_data, num_clusters, model="kmeans"
+            )
+        elif federated_algorithm == "simple_kmedian":
+            return FederatedAlgorithm.simple_federated_clustering(
+                client_data, num_clusters, model="kmedian"
+            )
+        else:
+            raise ValueError("Invalid federated algorithm.")
+
+    @staticmethod
+    def simple_federated_clustering(client_data, num_clusters, model="kmeans"):
         """Performs simple federated clustering."""
         cluster_centers = Client.aggregate_cluster_centers(
             client_data, num_clusters, model=model

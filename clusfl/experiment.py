@@ -42,7 +42,7 @@ class Experiment:
                     client_data=client_data,
                     fixed_centers=fixed_centers,
                     num_clusters=num_clusters,
-                    model=m,
+                    federated_algorithm=m,
                 )
 
                 # Calculation of additional metrics
