@@ -1,4 +1,4 @@
-from clusfl.datasets import DataGenerator
+from clusfl.dataset import DataGenerator
 from clusfl.utils import ClusteringUtils
 import numpy as np
 from .metrics import normalized_mutual_info_score, silhouette_score
