@@ -20,5 +20,5 @@ results = Experiment.compare_clustering_algorithms(
     fixed_centers=fixed_centers,
     num_features=num_features,
     model=["kmeans", "kmedian"],
-    iterations=100,
+    iterations=1,
 )

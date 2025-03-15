@@ -4,4 +4,4 @@ check:
 	pyright clusfl/
 
 run:
-	python -m examples.fed_kmedian.py
+	python -m examples.fed_kmedian
