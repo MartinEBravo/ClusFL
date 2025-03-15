@@ -12,7 +12,7 @@ fixed_centers = np.array([[2, 2], [20, 20], [-10, -10], [11, 11]])
 
 
 # ------------------ EXPERIMENTS ------------------
-results = Experiment.compare_clustering_algorithms(
+results = Experiment.compare_clustering_algorithms_synthetic(
     distribution_setup=distribution_types,
     num_clients=100,
     num_samples_per_client=100,

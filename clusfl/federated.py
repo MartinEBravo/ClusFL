@@ -84,7 +84,7 @@ class FederatedAlgorithm:
         weights = []
 
         for i in range(len(client_data)):
-            modelpp_name = model + "++"
+            modelpp_name = "kmeans++"
             modelpp = ClusteringAlgorithm.invoke_clustering_model(
                 modelpp_name, num_clusters
             )

@@ -7,7 +7,7 @@ from clusfl.metrics import Metrics
 
 class Experiment:
     @staticmethod
-    def compare_clustering_algorithms(
+    def compare_clustering_algorithms_synthetic(
         distribution_setup,
         num_clients=10,
         num_samples_per_client=100,
