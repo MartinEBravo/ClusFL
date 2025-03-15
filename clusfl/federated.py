@@ -11,15 +11,13 @@ class FederatedAlgorithm:
         num_clusters,
         fixed_centers,
         model="kmeans",
+        federated_algorithm="fedavg",
     ):
         """Performs federated clustering."""
+        aggregated_centers = FederatedAlgorithm.simple_federated_clustering(
+            client_data, num_clusters, fixed_centers, model=model
+        )
 
-        cluster_centers = Client.aggregate_cluster_centers(
-            client_data, num_clusters, model=model
-        )
-        aggregated_centers = Server.aggregate_cluster_centers(
-            cluster_centers, num_clusters, model=model
-        )
         actual_centers = Utils.match_centers(aggregated_centers, fixed_centers)
 
         all_points, all_labels, all_predicted_labels = Utils.get_all_points(
@@ -35,3 +33,17 @@ class FederatedAlgorithm:
             "NMI": nmi_score,
             "silhouette_score": silhouette_score_value,
         }
+
+    @staticmethod
+    def simple_federated_clustering(
+        client_data, num_clusters, fixed_centers, model="kmeans"
+    ):
+        """Performs simple federated clustering."""
+        cluster_centers = Client.aggregate_cluster_centers(
+            client_data, num_clusters, model=model
+        )
+        aggregated_centers = Server.aggregate_cluster_centers(
+            cluster_centers, num_clusters, model=model
+        )
+
+        return aggregated_centers

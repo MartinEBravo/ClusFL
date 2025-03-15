@@ -1,20 +1,8 @@
 import numpy as np
-from clusfl.cluster import KMeans, KMedian, KMedoids
 
 
 # ------------------ UTILS ------------------
 class Utils:
-    @staticmethod
-    def invoke_clustering_model(model, num_clusters):
-        if model == "kmeans":
-            return KMeans(n_clusters=num_clusters)
-        elif model == "kmedian":
-            return KMedian(n_clusters=num_clusters)
-        elif model == "kmedoids":
-            return KMedoids(n_clusters=num_clusters)
-        else:
-            raise ValueError("Unsupported clustering model.")
-
     @staticmethod
     def match_centers(aggregated_centers, fixed_centers):
         """Matches aggregated centers to actual fixed centers."""
