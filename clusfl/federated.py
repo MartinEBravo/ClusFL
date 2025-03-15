@@ -26,8 +26,12 @@ class FederatedClustering:
             num_features,
             fixed_centers,
         )
-        cluster_centers = Client.aggregate_cluster_centers(client_data, num_clusters, model=model)
-        aggregated_centers = Server.aggregate_cluster_centers(cluster_centers, num_clusters, model=model)
+        cluster_centers = Client.aggregate_cluster_centers(
+            client_data, num_clusters, model=model
+        )
+        aggregated_centers = Server.aggregate_cluster_centers(
+            cluster_centers, num_clusters, model=model
+        )
         actual_centers = ClusteringUtils.match_centers(
             aggregated_centers, fixed_centers
         )
