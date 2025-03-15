@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "clusfl"
 version = "0.1.0"
 description = "A Federated Learning library for k-Median clustering"
-authors = [{ name = "Martín Bravo", email = "martin16bravo@gmail.com" }]
+authors = [{ name = "Martin Bravo", email = "martin16bravo2@gmail.com" }]
 license = { file = "LICENSE" }
 dependencies = [
     "numpy",
